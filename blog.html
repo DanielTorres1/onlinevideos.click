@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Articles, Guides & Video Reviews | OnlineVideos.click</title>
+  <meta name="description" content="Explore streaming guides, tech reviews, movie recommendations, and home theater setup tips from OnlineVideos.click.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --yt-bg:#0f0f0f; --yt-header-bg:#0f0f0f; --yt-text:#f1f1f1; --yt-muted:#aaa; --accent:#3b82f6; --card-bg:#1e1e1e; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:"Roboto","Arial",sans-serif; background:var(--yt-bg); color:var(--yt-text); }
+    header { position:sticky; top:0; height:56px; background:var(--yt-header-bg); display:flex; align-items:center; justify-content:space-between; padding:0 24px; z-index:1000; border-bottom:1px solid rgba(255,255,255,0.07); }
+    .logo { display:flex; align-items:center; gap:8px; text-decoration:none; color:var(--yt-text); }
+    .logo-img { height:28px; width:auto; border-radius:6px; }
+    .logo-text { font-weight:700; font-size:18px; background:linear-gradient(135deg,#3b82f6 0%,#8b5cf6 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hero-banner { background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%); padding:4rem 2rem 3rem; text-align:center; border-bottom:1px solid #2a2a2a; }
+    .hero-banner h1 { font-size:2.4rem; color:var(--yt-text); margin-bottom:0.75rem; }
+    .hero-banner p { color:#94a3b8; max-width:650px; margin:0 auto; font-size:1.05rem; line-height:1.7; }
+    .articles-container { max-width:1100px; margin:3rem auto; padding:0 2rem 5rem; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:2rem; }
+    .card { background:var(--card-bg); border:1px solid #333; border-radius:12px; overflow:hidden; display:flex; flex-direction:column; transition:transform 0.2s, box-shadow 0.2s; }
+    .card:hover { transform:translateY(-5px); box-shadow:0 12px 30px rgba(0,0,0,0.5); }
+    .card-header { padding:1.5rem; background:linear-gradient(135deg,#1e3a5f 0%,#0f172a 100%); }
+    .card-category { font-size:0.75rem; font-weight:700; color:#60a5fa; text-transform:uppercase; display:inline-block; margin-bottom:0.5rem; }
+    .card h2 { font-size:1.15rem; color:white; line-height:1.4; margin:0; }
+    .card-body { padding:1.5rem; flex:1; display:flex; flex-direction:column; justify-content:space-between; }
+    .card-body p { color:var(--yt-muted); font-size:0.92rem; line-height:1.6; margin-bottom:1.5rem; }
+    .card-meta { font-size:0.8rem; color:#666; margin-bottom:1rem; }
+    .read-btn { display:inline-block; background:var(--accent); color:white; padding:0.6rem 1.25rem; border-radius:8px; text-decoration:none; font-size:0.88rem; font-weight:600; text-align:center; transition:background 0.2s; }
+    .read-btn:hover { background:#2563eb; }
+    footer { background:#111; border-top:1px solid #2a2a2a; padding:2rem 24px; text-align:center; }
+    .footer-links { display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap; margin-bottom:1rem; }
+    .footer-links a { color:var(--yt-muted); text-decoration:none; font-size:0.85rem; }
+    .footer-links a:hover { color:var(--yt-text); }
+    footer p { color:#666; font-size:0.8rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/" class="logo">
+      <img src="logo.png" alt="OnlineVideos.click Logo" class="logo-img">
+      <span class="logo-text">OnlineVideos.click</span>
+    </a>
+  </header>
+
+  <div class="hero-banner">
+    <h1>Streaming Guides & Entertainment Reviews</h1>
+    <p>Discover expert recommendations, movie breakdowns, hardware reviews, and home cinema optimization tips.</p>
+  </div>
+
+  <div class="articles-container">
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-category">Streaming Guide</span>
+          <h2>Top 10 Must-Watch Movies & Series on Prime Video (2026)</h2>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">📅 Published July 2026 • 8 min read</div>
+          <p>Curated list of award-winning shows and movies available in 4K HDR on Amazon Prime Video including Fallout, Reacher, and The Boys.</p>
+          <a href="article-prime-video-guide.html" class="read-btn">Read Article →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-category">Hardware Review</span>
+          <h2>Best Streaming Devices for 4K Ultra HD Home Theater</h2>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">📅 Published July 2026 • 6 min read</div>
+          <p>Detailed comparison of Fire TV Stick 4K Max, Fire TV Cube, and 4K media players for ultra-fast streaming and Dolby Atmos sound.</p>
+          <a href="article-best-streaming-devices.html" class="read-btn">Read Article →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="blog.html">Articles & Guides</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Use</a>
+    </div>
+    <p>&copy; 2026 OnlineVideos.click — We are a participant in the Amazon Services LLC Associates Program.</p>
+  </footer>
+</body>
+</html>
