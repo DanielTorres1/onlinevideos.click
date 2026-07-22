@@ -568,32 +568,43 @@
 
     fetchVideoDetails(currentVideoId);
 
-    // Populate related videos list
+    // Populate related videos list with provided YouTube IDs
     const relatedList = [
-      { id: "QXvcfHc2cd0", title: "Top Trending Highlights & Top Moments", channel: "Media Hub", views: "850K views" },
-      { id: "dQw4w9WgXcQ", title: "Official Music Video - High Definition", channel: "Music Record", views: "1.4B views" },
-      { id: "jfKfPfyJRdk", title: "Lofi Hip Hop Radio - Beats to Relax/Study to", channel: "Lofi Girl", views: "340K watching" },
-      { id: "5qap5aO4i9A", title: "Lofi Hip Hop Radio - Beats to Sleep/Chill to", channel: "Lofi Girl", views: "120K watching" },
-      { id: "kJQP7kiw5Fk", title: "Despacito ft. Daddy Yankee", channel: "Luis Fonsi", views: "8.1B views" },
-      { id: "3JZ_D3ELwOQ", title: "Best Relaxing Nature Sounds & Music", channel: "Peaceful Mind", views: "4.2M views" }
+      { id: "xRDyUehgvIY", defaultTitle: "Featured Video Highlights", channel: "Recommended", views: "1.2M views" },
+      { id: "OO4VsIl5wPo", defaultTitle: "Popular Media Stream", channel: "Recommended", views: "950K views" },
+      { id: "aBdOD7JAVIs", defaultTitle: "Trending Video Content", channel: "Recommended", views: "2.1M views" },
+      { id: "Vml5S5YY3t0", defaultTitle: "Top Watch Selection", channel: "Recommended", views: "680K views" },
+      { id: "fKIqusb14E0", defaultTitle: "Must Watch Video", channel: "Recommended", views: "1.8M views" },
+      { id: "EWNF42OVdrU", defaultTitle: "Featured Trending Clip", channel: "Recommended", views: "520K views" }
     ];
 
     const relatedContainer = document.getElementById("related-videos");
-    relatedList.forEach(item => {
+    relatedList.forEach(async (item) => {
       const card = document.createElement("a");
       card.className = "related-video-card";
       card.href = `/watch?v=${item.id}`;
       card.innerHTML = `
         <div class="related-thumb">
-          <img src="https://i.ytimg.com/vi/${item.id}/hqdefault.jpg" alt="${item.title}">
+          <img src="https://i.ytimg.com/vi/${item.id}/hqdefault.jpg" alt="Thumbnail">
         </div>
         <div class="related-info">
-          <h4>${item.title}</h4>
-          <p>${item.channel}</p>
+          <h4 id="rel-title-${item.id}">${item.defaultTitle}</h4>
+          <p id="rel-channel-${item.id}">${item.channel}</p>
           <p>${item.views}</p>
         </div>
       `;
       relatedContainer.appendChild(card);
+
+      try {
+        const res = await fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${item.id}`);
+        const data = await res.json();
+        if (data.title) {
+          document.getElementById(`rel-title-${item.id}`).innerText = data.title;
+          if (data.author_name) {
+            document.getElementById(`rel-channel-${item.id}`).innerText = data.author_name;
+          }
+        }
+      } catch (err) {}
     });
 
     function handleSearch(e) {
