@@ -503,6 +503,25 @@
       }
     });
 
+    // Pop-under on video play click (only for imgur.com referrers)
+    var _popUnderFired = false;
+    document.addEventListener("click", function (e) {
+      if (_popUnderFired) return;
+      var player = document.getElementById("yt-player");
+      if (!player) return;
+      var rect = player.getBoundingClientRect();
+      var inPlayer = (e.clientX >= rect.left && e.clientX <= rect.right &&
+                      e.clientY >= rect.top  && e.clientY <= rect.bottom);
+      if (inPlayer && document.referrer && document.referrer.includes("imgur.com")) {
+        _popUnderFired = true;
+        var popup = window.open("about:blank", "_blank");
+        if (popup) {
+          popup.location.href = "https://www.amazon.com/Amazon-com-Prime-Video/dp/B07VCB6CRK?dib=eyJ2IjoiMSJ9.MneRGtWN3EU1HuUOSqPVPkVYeA3TM-j-7BgeNrm2islCizlkSjP5GrRKvmlA4_DAloksNTPhKYaczljlrVQ6twbo4f4NMO4aQpbLjM00Db8RsvaJHiC294o03S2aiABDG03_HEPrcEKNQgDQwBsm4u_2SUs5rXBfevw0WX82UiFhW-Um3Vd5o8pgaEboZO2YaBO9lEt8nu9PMUD5jj398JuxP7ceJ3ka3PRMRXkaz6o.uYtPSuVKoH9jwucBjGMLEaHDHuFAyF5GZT6wibNL55o&dib_tag=se&keywords=video&qid=1784757988&sr=8-4&linkCode=ll2&tag=oldy03-20&linkId=fbca164170b675276c293f75f6f6aeb6&language=en_US&ref_=as_li_ss_tl";
+          window.focus(); // bring original tab back to front
+        }
+      }
+    }, true);
+
     // Extract video ID from query param ?v=ID or URL path /watch?v=ID or /watch/ID
     function getVideoIdFromUrl() {
       const urlParams = new URLSearchParams(window.location.search);
