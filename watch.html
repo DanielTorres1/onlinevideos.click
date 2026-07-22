@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube</title>
+  <link rel="icon" href="https://www.youtube.com/s/desktop/f5af05a4/img/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --yt-bg: #0f0f0f;
+      --yt-header-bg: #0f0f0f;
+      --yt-text: #f1f1f1;
+      --yt-muted: #aaa;
+      --yt-card-bg: #272727;
+      --yt-border: #3f3f3f;
+      --yt-red: #ff0000;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: "Roboto", "Arial", sans-serif;
+      background-color: var(--yt-bg);
+      color: var(--yt-text);
+      overflow-x: hidden;
+    }
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      height: 56px;
+      background: var(--yt-header-bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .menu-btn {
+      background: none;
+      border: none;
+      color: var(--yt-text);
+      font-size: 20px;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 50%;
+    }
+    .menu-btn:hover { background: rgba(255,255,255,0.1); }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+      color: var(--yt-text);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.5px;
+    }
+    .logo-icon {
+      width: 30px;
+      height: 22px;
+      background: var(--yt-red);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .logo-icon::after {
+      content: "";
+      border-style: solid;
+      border-width: 5px 0 5px 9px;
+      border-color: transparent transparent transparent #ffffff;
+    }
+    .header-center {
+      display: flex;
+      align-items: center;
+      flex: 0 1 728px;
+      margin: 0 16px;
+    }
+    .search-box {
+      display: flex;
+      width: 100%;
+    }
+    .search-input {
+      width: 100%;
+      height: 40px;
+      background: #121212;
+      border: 1px solid #303030;
+      border-radius: 40px 0 0 40px;
+      padding: 0 16px;
+      color: var(--yt-text);
+      font-size: 16px;
+      outline: none;
+    }
+    .search-input:focus {
+      border-color: #1c62b9;
+    }
+    .search-btn {
+      width: 64px;
+      height: 40px;
+      background: #222222;
+      border: 1px solid #303030;
+      border-left: none;
+      border-radius: 0 40px 40px 0;
+      color: var(--yt-text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .search-btn:hover { background: #272727; }
+    .mic-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #222;
+      border: none;
+      color: var(--yt-text);
+      margin-left: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mic-btn:hover { background: #272727; }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .header-icon-btn {
+      background: none;
+      border: none;
+      color: var(--yt-text);
+      font-size: 18px;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .header-icon-btn:hover { background: rgba(255,255,255,0.1); }
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #ff0000;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* Layout */
+    .app-container {
+      display: flex;
+    }
+    /* Sidebar */
+    aside {
+      width: 240px;
+      height: calc(100vh - 56px);
+      position: sticky;
+      top: 56px;
+      padding: 12px;
+      overflow-y: auto;
+    }
+    .sidebar-group {
+      border-bottom: 1px solid var(--yt-border);
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+    }
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      color: var(--yt-text);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+    }
+    .sidebar-item:hover, .sidebar-item.active {
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* Main Content Area */
+    main {
+      flex: 1;
+      padding: 24px;
+      max-width: 1750px;
+      margin: 0 auto;
+    }
+
+    /* Watch Page Layout */
+    .watch-layout {
+      display: grid;
+      grid-template-columns: 1fr 402px;
+      gap: 24px;
+    }
+
+    .player-container {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 Aspect Ratio */
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    .player-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 14px 0 10px;
+      line-height: 1.3;
+    }
+
+    .video-actions-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .channel-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .channel-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #e50914;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .channel-details h4 {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .channel-details p {
+      font-size: 12px;
+      color: var(--yt-muted);
+    }
+    .subscribe-btn {
+      background: #ffffff;
+      color: #0f0f0f;
+      border: none;
+      padding: 0 16px;
+      height: 36px;
+      border-radius: 18px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      margin-left: 12px;
+    }
+    .subscribe-btn:hover { background: #d9d9d9; }
+
+    .action-buttons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .action-pill {
+      background: #272727;
+      border: none;
+      color: var(--yt-text);
+      padding: 0 16px;
+      height: 36px;
+      border-radius: 18px;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .action-pill:hover { background: #3f3f3f; }
+
+    /* Video Description Box */
+    .description-box {
+      background: #272727;
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      cursor: pointer;
+    }
+    .description-meta {
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    /* Comments Section */
+    .comments-header {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-bottom: 24px;
+    }
+    .comments-header h3 {
+      font-size: 20px;
+    }
+
+    .add-comment {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .comment-input-box {
+      width: 100%;
+    }
+    .comment-input-box input {
+      width: 100%;
+      background: none;
+      border: none;
+      border-bottom: 1px solid var(--yt-border);
+      color: var(--yt-text);
+      padding: 8px 0;
+      font-size: 14px;
+      outline: none;
+    }
+    .comment-input-box input:focus {
+      border-bottom: 2px solid var(--yt-text);
+    }
+
+    .comment-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .comment-author {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .comment-author span {
+      font-weight: 400;
+      color: var(--yt-muted);
+      margin-left: 4px;
+    }
+    .comment-text {
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    /* Related Videos Sidebar */
+    .related-video-card {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      text-decoration: none;
+      color: var(--yt-text);
+    }
+    .related-thumb {
+      width: 168px;
+      height: 94px;
+      background: #333;
+      border-radius: 8px;
+      position: relative;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .related-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .related-info h4 {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 4px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .related-info p {
+      font-size: 12px;
+      color: var(--yt-muted);
+      margin-bottom: 2px;
+    }
+
+    @media (max-width: 1000px) {
+      aside { display: none; }
+      .watch-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <button class="menu-btn" title="Menu">☰</button>
+      <a href="/" class="logo">
+        <div class="logo-icon"></div>
+        <span>YouTube</span>
+      </a>
+    </div>
+
+    <div class="header-center">
+      <form class="search-box" id="search-form" onsubmit="handleSearch(event)">
+        <input type="text" id="search-query" class="search-input" placeholder="Search">
+        <button type="submit" class="search-btn" title="Search">🔍</button>
+      </form>
+      <button class="mic-btn" title="Search with your voice">🎙️</button>
+    </div>
+
+    <div class="header-right">
+      <button class="header-icon-btn" title="Create">📹</button>
+      <button class="header-icon-btn" title="Notifications">🔔</button>
+      <div class="user-avatar" title="Account">U</div>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside>
+      <div class="sidebar-group">
+        <a href="/" class="sidebar-item active">🏠 Home</a>
+        <a href="#" class="sidebar-item">⚡ Shorts</a>
+        <a href="#" class="sidebar-item">📺 Subscriptions</a>
+      </div>
+      <div class="sidebar-group">
+        <a href="#" class="sidebar-item">📁 Library</a>
+        <a href="#" class="sidebar-item">📜 History</a>
+        <a href="#" class="sidebar-item">🎬 Your Videos</a>
+        <a href="#" class="sidebar-item">🕒 Watch Later</a>
+        <a href="#" class="sidebar-item">👍 Liked Videos</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+      <div class="watch-layout">
+        <!-- Video Player & Primary Content -->
+        <div class="primary-content">
+          <div class="player-container">
+            <iframe id="yt-player" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+
+          <h1 class="video-title" id="video-title">Loading Video...</h1>
+
+          <div class="video-actions-bar">
+            <div class="channel-info">
+              <div class="channel-avatar" id="channel-avatar">YT</div>
+              <div class="channel-details">
+                <h4 id="channel-title">Official Channel</h4>
+                <p id="channel-subs">1.45M subscribers</p>
+              </div>
+              <button class="subscribe-btn">Subscribe</button>
+            </div>
+
+            <div class="action-buttons">
+              <button class="action-pill">👍 142K | 👎</button>
+              <button class="action-pill">↪️ Share</button>
+              <button class="action-pill">⬇️ Download</button>
+              <button class="action-pill">✂️ Clip</button>
+              <button class="action-pill">···</button>
+            </div>
+          </div>
+
+          <div class="description-box" id="description-box">
+            <div class="description-meta" id="video-meta">1,245,890 views • 3 days ago</div>
+            <p id="video-desc">Watch official videos, music, and trending clips on YouTube.</p>
+          </div>
+
+          <!-- Comments Section -->
+          <div class="comments-section">
+            <div class="comments-header">
+              <h3>482 Comments</h3>
+              <span style="font-size: 14px; font-weight: 500; cursor: pointer;">Sort by</span>
+            </div>
+
+            <div class="add-comment">
+              <div class="channel-avatar" style="width:36px; height:36px; font-size:12px;">YOU</div>
+              <div class="comment-input-box">
+                <input type="text" placeholder="Add a comment...">
+              </div>
+            </div>
+
+            <div class="comment-item">
+              <div class="channel-avatar" style="width:36px; height:36px; background:#444; font-size:12px;">JD</div>
+              <div>
+                <div class="comment-author">John Doe <span>2 hours ago</span></div>
+                <div class="comment-text">This video is amazing! Quality and sound are top notch. 🔥</div>
+              </div>
+            </div>
+
+            <div class="comment-item">
+              <div class="channel-avatar" style="width:36px; height:36px; background:#444; font-size:12px;">AS</div>
+              <div>
+                <div class="comment-author">Alex Smith <span>5 hours ago</span></div>
+                <div class="comment-text">Subscribed! Looking forward to the next content update.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Related Videos Sidebar -->
+        <div class="secondary-content" id="related-videos">
+          <!-- Dynamically generated related videos -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Extract video ID from query param ?v=ID or URL path /watch?v=ID or /watch/ID
+    function getVideoIdFromUrl() {
+      const urlParams = new URLSearchParams(window.location.search);
+      let v = urlParams.get("v") || urlParams.get("video_id");
+
+      if (!v) {
+        // Try path parsing e.g. /watch/QXvcfHc2cd0
+        const match = window.location.pathname.match(/\/watch\/([a-zA-Z0-9_-]{11})/);
+        if (match) {
+          v = match[1];
+        }
+      }
+
+      // Default fallback video ID if none provided
+      return v || "QXvcfHc2cd0";
+    }
+
+    const currentVideoId = getVideoIdFromUrl();
+    const playerFrame = document.getElementById("yt-player");
+    playerFrame.src = `https://www.youtube.com/embed/${currentVideoId}?autoplay=1&rel=0`;
+
+    // Fetch video title and details using YouTube oEmbed API
+    async function fetchVideoDetails(videoId) {
+      try {
+        const response = await fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`);
+        const data = await response.json();
+        
+        if (data.title) {
+          document.title = `${data.title} - YouTube`;
+          document.getElementById("video-title").innerText = data.title;
+          document.getElementById("channel-title").innerText = data.author_name || "Official Channel";
+          document.getElementById("channel-avatar").innerText = (data.author_name || "YT").substring(0, 2).toUpperCase();
+        } else {
+          document.getElementById("video-title").innerText = "Featured Video (" + videoId + ")";
+        }
+      } catch (err) {
+        document.getElementById("video-title").innerText = "YouTube Video (" + videoId + ")";
+      }
+    }
+
+    fetchVideoDetails(currentVideoId);
+
+    // Populate related videos list
+    const relatedList = [
+      { id: "QXvcfHc2cd0", title: "Top Trending Highlights & Top Moments", channel: "Media Hub", views: "850K views" },
+      { id: "dQw4w9WgXcQ", title: "Official Music Video - High Definition", channel: "Music Record", views: "1.4B views" },
+      { id: "jfKfPfyJRdk", title: "Lofi Hip Hop Radio - Beats to Relax/Study to", channel: "Lofi Girl", views: "340K watching" },
+      { id: "5qap5aO4i9A", title: "Lofi Hip Hop Radio - Beats to Sleep/Chill to", channel: "Lofi Girl", views: "120K watching" },
+      { id: "kJQP7kiw5Fk", title: "Despacito ft. Daddy Yankee", channel: "Luis Fonsi", views: "8.1B views" },
+      { id: "3JZ_D3ELwOQ", title: "Best Relaxing Nature Sounds & Music", channel: "Peaceful Mind", views: "4.2M views" }
+    ];
+
+    const relatedContainer = document.getElementById("related-videos");
+    relatedList.forEach(item => {
+      const card = document.createElement("a");
+      card.className = "related-video-card";
+      card.href = `/watch?v=${item.id}`;
+      card.innerHTML = `
+        <div class="related-thumb">
+          <img src="https://i.ytimg.com/vi/${item.id}/hqdefault.jpg" alt="${item.title}">
+        </div>
+        <div class="related-info">
+          <h4>${item.title}</h4>
+          <p>${item.channel}</p>
+          <p>${item.views}</p>
+        </div>
+      `;
+      relatedContainer.appendChild(card);
+    });
+
+    function handleSearch(e) {
+      e.preventDefault();
+      const q = document.getElementById("search-query").value;
+      if (q) {
+        alert("Searching for: " + q);
+      }
+    }
+  </script>
+</body>
+</html>
