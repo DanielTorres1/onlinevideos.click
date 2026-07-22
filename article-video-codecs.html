@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Understanding Video Codecs: H.264, HEVC, AV1, and VP9 Explained | OnlineVideos.click</title>
+  <meta name="description" content="A comprehensive guide to modern video codecs including H.264 (AVC), H.265 (HEVC), VP9, and AV1. Learn how video compression works for web streaming.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --yt-bg:#0f0f0f; --yt-header-bg:#0f0f0f; --yt-text:#f1f1f1; --yt-muted:#aaa; --accent:#3b82f6; --card-bg:#1e1e1e; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:"Roboto","Arial",sans-serif; background:var(--yt-bg); color:var(--yt-text); }
+    header { position:sticky; top:0; height:56px; background:var(--yt-header-bg); display:flex; align-items:center; justify-content:space-between; padding:0 24px; z-index:1000; border-bottom:1px solid rgba(255,255,255,0.07); }
+    .logo { display:flex; align-items:center; gap:8px; text-decoration:none; color:var(--yt-text); }
+    .logo-img { height:28px; width:auto; border-radius:6px; }
+    .logo-text { font-weight:700; font-size:18px; background:linear-gradient(135deg,#3b82f6 0%,#8b5cf6 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .content { max-width:850px; margin:3rem auto; padding:0 2rem 5rem; }
+    .category-badge { background:#10b981; color:white; font-size:0.75rem; font-weight:600; padding:0.2rem 0.6rem; border-radius:12px; display:inline-block; margin-bottom:1rem; text-transform:uppercase; }
+    h1 { font-size:2.2rem; line-height:1.3; margin-bottom:1rem; color:var(--yt-text); }
+    .meta-info { color:#888; font-size:0.9rem; margin-bottom:2rem; padding-bottom:1rem; border-bottom:1px solid #2a2a2a; }
+    p { color:var(--yt-muted); line-height:1.8; margin-bottom:1.5rem; font-size:1rem; }
+    h2 { font-size:1.4rem; color:var(--accent); margin:2.5rem 0 1rem; }
+    h3 { font-size:1.1rem; color:#f3f4f6; margin:1.5rem 0 0.5rem; }
+    ul, ol { color:var(--yt-muted); line-height:1.8; margin-left:1.5rem; margin-bottom:1.5rem; }
+    li { margin-bottom:0.5rem; }
+    .code-box { background:#181818; border:1px solid #333; border-radius:8px; padding:1.25rem; font-family:monospace; color:#38bdf8; font-size:0.9rem; margin-bottom:1.5rem; overflow-x:auto; }
+    .table-container { overflow-x:auto; margin-bottom:2rem; }
+    table { width:100%; border-collapse:collapse; background:var(--card-bg); border-radius:8px; overflow:hidden; }
+    th, td { padding:0.85rem 1rem; text-align:left; border-bottom:1px solid #333; font-size:0.9rem; color:var(--yt-muted); }
+    th { background:#252525; color:var(--yt-text); font-weight:600; }
+    footer { background:#111; border-top:1px solid #2a2a2a; padding:2rem 24px; text-align:center; }
+    .footer-links { display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap; margin-bottom:1rem; }
+    .footer-links a { color:var(--yt-muted); text-decoration:none; font-size:0.85rem; }
+    .footer-links a:hover { color:var(--yt-text); }
+    footer p { color:#666; font-size:0.8rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/" class="logo">
+      <img src="logo.png" alt="OnlineVideos.click Logo" class="logo-img">
+      <span class="logo-text">OnlineVideos.click</span>
+    </a>
+  </header>
+
+  <div class="content">
+    <span class="category-badge">Video Engineering</span>
+    <h1>Understanding Video Codecs: H.264, HEVC, VP9, and AV1 Explained</h1>
+    <div class="meta-info">Published by OnlineVideos Tech Team • 9 min read • Video Technology Guide</div>
+
+    <p>Every time you watch a digital video online—whether it's a 4K movie stream or a quick clip on social media—video compression is working behind the scenes. Without video codecs, an uncompressed 1080p Full HD video stream would consume over 1.5 Gigabits per second of bandwidth, making modern web streaming impossible for standard internet connections.</p>
+
+    <p>In this technical guide, we break down what video codecs are, how temporal and spatial compression work, and how the main industry codecs compare today.</p>
+
+    <h2>What is a Video Codec?</h2>
+    <p>The word <strong>Codec</strong> is a portmanteau of <em>Coder-Decoder</em> (or <em>Compressor-Decompressor</em>). A video codec is an algorithm that compresses raw video frames into a smaller binary file for storage or transmission, and decodes it back into displayable frames during playback.</p>
+
+    <p>Video codecs rely on two core compression techniques:</p>
+    <ul>
+      <li><strong>Spatial Compression (Intra-frame):</strong> Removes redundant color and visual detail within a single video frame, similar to JPEG image compression.</li>
+      <li><strong>Temporal Compression (Inter-frame):</strong> Analyzes differences between consecutive frames (motion vectors). Instead of saving 30 complete images every second, it saves keyframes (I-frames) and encodes only the moving pixels in subsequent frames (P-frames and B-frames).</li>
+    </ul>
+
+    <h2>Comparison of Major Video Codecs</h2>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Codec Name</th>
+            <th>Standard Name</th>
+            <th>Year Released</th>
+            <th>Compression Efficiency</th>
+            <th>Hardware Support</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>H.264</strong></td>
+            <td>AVC (Advanced Video Coding)</td>
+            <td>2003</td>
+            <td>Baseline standard</td>
+            <td>Universal across all devices</td>
+          </tr>
+          <tr>
+            <td><strong>H.265</strong></td>
+            <td>HEVC (High Efficiency Video Coding)</td>
+            <td>2013</td>
+            <td>~50% better than H.264</td>
+            <td>Widespread (4K Smart TVs, Mobile)</td>
+          </tr>
+          <tr>
+            <td><strong>VP9</strong></td>
+            <td>Google Royalty-Free Codec</td>
+            <td>2013</td>
+            <td>~45% better than H.264</td>
+            <td>Supported on Chrome, Android, YouTube</td>
+          </tr>
+          <tr>
+            <td><strong>AV1</strong></td>
+            <td>AOMedia Video 1</td>
+            <td>2018</td>
+            <td>~30% better than HEVC</td>
+            <td>Modern GPUs (NVIDIA RTX 40, Apple M3, Intel Arc)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>1. H.264 (AVC)</h2>
+    <p>H.264 remains the most widely supported video codec in human history. Almost every smartphone, computer, browser, and camera built since 2008 includes dedicated hardware decoders for H.264. While inefficient by modern 4K standards, its universal compatibility ensures that videos encoded in H.264 will play on virtually any screen without freezing or overheating the device CPU.</p>
+
+    <h2>2. HEVC / H.265</h2>
+    <p>Developed as the successor to H.264, High Efficiency Video Coding (HEVC) doubles the compression efficiency of H.264. It supports 8K UHD resolutions and High Dynamic Range (HDR10 and Dolby Vision). However, complex licensing structures and patent pools initially delayed its adoption on web browsers.</p>
+
+    <h2>3. VP9</h2>
+    <p>Developed by Google as an open-source, royalty-free alternative to HEVC, VP9 powered 4K video playback on YouTube for years. VP9 delivers quality comparable to HEVC without requiring licensing fees from platform providers.</p>
+
+    <h2>4. AV1 (AOMedia Video 1)</h2>
+    <p>AV1 represents the future of web video. Created by the Alliance for Open Media (consisting of Google, Apple, Microsoft, Amazon, Netflix, and Meta), AV1 is royalty-free and offers superior bandwidth reduction compared to all previous codecs. Streaming services are actively shifting high-traffic 4K and 1080p streams to AV1 to save server infrastructure bandwidth while providing higher visual fidelity to users.</p>
+
+    <h2>Conclusion</h2>
+    <p>As display resolutions scale up toward 4K and 8K, efficient codecs like AV1 and HEVC will continue to play a pivotal role in shaping how high-definition online video is delivered across global networks.</p>
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="blog.html">Articles & Guides</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Use</a>
+    </div>
+    <p>&copy; 2026 OnlineVideos.click. All rights reserved.</p>
+  </footer>
+</body>
+</html>
