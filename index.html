@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,17 +17,20 @@
       --yt-border: #3f3f3f;
       --yt-red: #3b82f6;
     }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
     body {
       font-family: "Roboto", "Arial", sans-serif;
       background-color: var(--yt-bg);
       color: var(--yt-text);
       overflow-x: hidden;
     }
+
     /* Header */
     header {
       position: sticky;
@@ -38,13 +42,15 @@
       justify-content: space-between;
       padding: 0 16px;
       z-index: 1000;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
+
     .header-left {
       display: flex;
       align-items: center;
       gap: 16px;
     }
+
     .menu-btn {
       background: none;
       border: none;
@@ -54,7 +60,11 @@
       padding: 8px;
       border-radius: 50%;
     }
-    .menu-btn:hover { background: rgba(255,255,255,0.1); }
+
+    .menu-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
     .logo {
       display: flex;
       align-items: center;
@@ -62,11 +72,13 @@
       text-decoration: none;
       color: var(--yt-text);
     }
+
     .logo-img {
       height: 28px;
       width: auto;
       border-radius: 6px;
     }
+
     .logo-text {
       font-weight: 700;
       font-size: 18px;
@@ -75,16 +87,19 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+
     .header-center {
       display: flex;
       align-items: center;
       flex: 0 1 728px;
       margin: 0 16px;
     }
+
     .search-box {
       display: flex;
       width: 100%;
     }
+
     .search-input {
       width: 100%;
       height: 40px;
@@ -96,9 +111,11 @@
       font-size: 16px;
       outline: none;
     }
+
     .search-input:focus {
       border-color: #1c62b9;
     }
+
     .search-btn {
       width: 64px;
       height: 40px;
@@ -112,7 +129,11 @@
       align-items: center;
       justify-content: center;
     }
-    .search-btn:hover { background: #272727; }
+
+    .search-btn:hover {
+      background: #272727;
+    }
+
     .mic-btn {
       width: 40px;
       height: 40px;
@@ -126,12 +147,17 @@
       align-items: center;
       justify-content: center;
     }
-    .mic-btn:hover { background: #272727; }
+
+    .mic-btn:hover {
+      background: #272727;
+    }
+
     .header-right {
       display: flex;
       align-items: center;
       gap: 16px;
     }
+
     .header-icon-btn {
       background: none;
       border: none;
@@ -145,7 +171,11 @@
       align-items: center;
       justify-content: center;
     }
-    .header-icon-btn:hover { background: rgba(255,255,255,0.1); }
+
+    .header-icon-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
     .user-avatar {
       width: 32px;
       height: 32px;
@@ -164,6 +194,7 @@
     .app-container {
       display: flex;
     }
+
     /* Sidebar */
     aside {
       width: 240px;
@@ -173,11 +204,13 @@
       padding: 12px;
       overflow-y: auto;
     }
+
     .sidebar-group {
       border-bottom: 1px solid var(--yt-border);
       padding-bottom: 12px;
       margin-bottom: 12px;
     }
+
     .sidebar-item {
       display: flex;
       align-items: center;
@@ -189,8 +222,10 @@
       font-size: 14px;
       font-weight: 400;
     }
-    .sidebar-item:hover, .sidebar-item.active {
-      background: rgba(255,255,255,0.1);
+
+    .sidebar-item:hover,
+    .sidebar-item.active {
+      background: rgba(255, 255, 255, 0.1);
     }
 
     /* Main Content Area */
@@ -211,12 +246,14 @@
     .player-container {
       position: relative;
       width: 100%;
-      padding-top: 56.25%; /* 16:9 Aspect Ratio */
+      padding-top: 56.25%;
+      /* 16:9 Aspect Ratio */
       background: #000;
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     }
+
     .player-container iframe {
       position: absolute;
       top: 0;
@@ -241,11 +278,13 @@
       gap: 16px;
       margin-bottom: 16px;
     }
+
     .channel-info {
       display: flex;
       align-items: center;
       gap: 12px;
     }
+
     .channel-avatar {
       width: 40px;
       height: 40px;
@@ -257,14 +296,17 @@
       align-items: center;
       justify-content: center;
     }
+
     .channel-details h4 {
       font-size: 16px;
       font-weight: 600;
     }
+
     .channel-details p {
       font-size: 12px;
       color: var(--yt-muted);
     }
+
     .subscribe-btn {
       background: #ffffff;
       color: #0f0f0f;
@@ -277,13 +319,17 @@
       cursor: pointer;
       margin-left: 12px;
     }
-    .subscribe-btn:hover { background: #d9d9d9; }
+
+    .subscribe-btn:hover {
+      background: #d9d9d9;
+    }
 
     .action-buttons {
       display: flex;
       align-items: center;
       gap: 8px;
     }
+
     .action-pill {
       background: #272727;
       border: none;
@@ -298,7 +344,10 @@
       gap: 6px;
       cursor: pointer;
     }
-    .action-pill:hover { background: #3f3f3f; }
+
+    .action-pill:hover {
+      background: #3f3f3f;
+    }
 
     /* Video Description Box */
     .description-box {
@@ -310,6 +359,7 @@
       margin-bottom: 24px;
       cursor: pointer;
     }
+
     .description-meta {
       font-weight: 600;
       margin-bottom: 6px;
@@ -322,6 +372,7 @@
       gap: 32px;
       margin-bottom: 24px;
     }
+
     .comments-header h3 {
       font-size: 20px;
     }
@@ -331,9 +382,11 @@
       gap: 16px;
       margin-bottom: 32px;
     }
+
     .comment-input-box {
       width: 100%;
     }
+
     .comment-input-box input {
       width: 100%;
       background: none;
@@ -344,6 +397,7 @@
       font-size: 14px;
       outline: none;
     }
+
     .comment-input-box input:focus {
       border-bottom: 2px solid var(--yt-text);
     }
@@ -353,16 +407,19 @@
       gap: 16px;
       margin-bottom: 20px;
     }
+
     .comment-author {
       font-size: 13px;
       font-weight: 600;
       margin-bottom: 4px;
     }
+
     .comment-author span {
       font-weight: 400;
       color: var(--yt-muted);
       margin-left: 4px;
     }
+
     .comment-text {
       font-size: 14px;
       line-height: 1.4;
@@ -376,6 +433,7 @@
       text-decoration: none;
       color: var(--yt-text);
     }
+
     .related-thumb {
       width: 168px;
       height: 94px;
@@ -385,11 +443,13 @@
       flex-shrink: 0;
       overflow: hidden;
     }
+
     .related-thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+
     .related-info h4 {
       font-size: 14px;
       font-weight: 600;
@@ -400,6 +460,7 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
+
     .related-info p {
       font-size: 12px;
       color: var(--yt-muted);
@@ -407,11 +468,17 @@
     }
 
     @media (max-width: 1000px) {
-      aside { display: none; }
-      .watch-layout { grid-template-columns: 1fr; }
+      aside {
+        display: none;
+      }
+
+      .watch-layout {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- Header -->
@@ -452,8 +519,12 @@
         <!-- Video Player & Primary Content -->
         <div class="primary-content">
           <div class="player-container">
-            <iframe id="yt-player" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <div id="player-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; cursor: pointer;"></div>
+            <iframe id="yt-player" src=""
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+            <div id="player-overlay"
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; cursor: pointer;">
+            </div>
           </div>
 
           <h1 class="video-title" id="video-title">Loading Video...</h1>
@@ -489,8 +560,10 @@
         <div class="secondary-content">
           <div id="related-videos"></div>
           <div style="margin-top: 16px; text-align: center;">
-            <a href="https://www.amazon.com/Amazon-com-Prime-Video/dp/B07VCB6CRK?dib=eyJ2IjoiMSJ9.MneRGtWN3EU1HuUOSqPVPkVYeA3TM-j-7BgeNrm2islCizlkSjP5GrRKvmlA4_DAloksNTPhKYaczljlrVQ6twbo4f4NMO4aQpbLjM00Db8RsvaJHiC294o03S2aiABDG03_HEPrcEKNQgDQwBsm4u_2SUs5rXBfevw0WX82UiFhW-Um3Vd5o8pgaEboZO2YaBO9lEt8nu9PMUD5jj398JuxP7ceJ3ka3PRMRXkaz6o.uYtPSuVKoH9jwucBjGMLEaHDHuFAyF5GZT6wibNL55o&amp;dib_tag=se&amp;keywords=video&amp;qid=1784757988&amp;sr=8-4&amp;linkCode=ll2&amp;tag=oldy03-20&amp;linkId=fbca164170b675276c293f75f6f6aeb6&amp;language=en_US&amp;ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer">
-              <img src="31W9hs7w0JL.png" alt="Prime Video" style="width: 50%; height: auto; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.3);">
+            <a href="https://www.amazon.com/Amazon-com-Prime-Video/dp/B07VCB6CRK?dib=eyJ2IjoiMSJ9.MneRGtWN3EU1HuUOSqPVPkVYeA3TM-j-7BgeNrm2islCizlkSjP5GrRKvmlA4_DAloksNTPhKYaczljlrVQ6twbo4f4NMO4aQpbLjM00Db8RsvaJHiC294o03S2aiABDG03_HEPrcEKNQgDQwBsm4u_2SUs5rXBfevw0WX82UiFhW-Um3Vd5o8pgaEboZO2YaBO9lEt8nu9PMUD5jj398JuxP7ceJ3ka3PRMRXkaz6o.uYtPSuVKoH9jwucBjGMLEaHDHuFAyF5GZT6wibNL55o&amp;dib_tag=se&amp;keywords=video&amp;qid=1784757988&amp;sr=8-4&amp;linkCode=ll2&amp;tag=2222-20&amp;linkId=fbca164170b675276c293f75f6f6aeb6&amp;language=en_US&amp;ref_=as_li_ss_tl"
+              target="_blank" rel="noopener noreferrer">
+              <img src="31W9hs7w0JL.png" alt="Prime Video"
+                style="width: 50%; height: auto; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.3);">
             </a>
           </div>
         </div>
@@ -508,12 +581,14 @@
       <a href="terms.html" style="color:#aaa; text-decoration:none; font-size:0.85rem;">Terms of Use</a>
     </div>
     <p style="color:#666; font-size:0.8rem; line-height:1.5; max-width:800px; margin:0 auto;">
-      &copy; 2026 OnlineVideos.click. All rights reserved. OnlineVideos.click is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com.
+      &copy; 2026 OnlineVideos.click. All rights reserved. OnlineVideos.click is a participant in the Amazon Services
+      LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising
+      fees by advertising and linking to Amazon.com.
     </p>
   </footer>
 
   <script>
-    const AMAZON_REDIRECT_URL = "https://www.amazon.com/Amazon-com-Prime-Video/dp/B07VCB6CRK?dib=eyJ2IjoiMSJ9.MneRGtWN3EU1HuUOSqPVPkVYeA3TM-j-7BgeNrm2islCizlkSjP5GrRKvmlA4_DAloksNTPhKYaczljlrVQ6twbo4f4NMO4aQpbLjM00Db8RsvaJHiC294o03S2aiABDG03_HEPrcEKNQgDQwBsm4u_2SUs5rXBfevw0WX82UiFhW-Um3Vd5o8pgaEboZO2YaBO9lEt8nu9PMUD5jj398JuxP7ceJ3ka3PRMRXkaz6o.uYtPSuVKoH9jwucBjGMLEaHDHuFAyF5GZT6wibNL55o&dib_tag=se&keywords=video&qid=1784757988&sr=8-4&linkCode=ll2&tag=oldy03-20&linkId=fbca164170b675276c293f75f6f6aeb6&language=en_US&ref_=as_li_ss_tl";
+    const AMAZON_REDIRECT_URL = "https://www.amazon.com/Amazon-com-Prime-Video/dp/B07VCB6CRK?dib=eyJ2IjoiMSJ9.MneRGtWN3EU1HuUOSqPVPkVYeA3TM-j-7BgeNrm2islCizlkSjP5GrRKvmlA4_DAloksNTPhKYaczljlrVQ6twbo4f4NMO4aQpbLjM00Db8RsvaJHiC294o03S2aiABDG03_HEPrcEKNQgDQwBsm4u_2SUs5rXBfevw0WX82UiFhW-Um3Vd5o8pgaEboZO2YaBO9lEt8nu9PMUD5jj398JuxP7ceJ3ka3PRMRXkaz6o.uYtPSuVKoH9jwucBjGMLEaHDHuFAyF5GZT6wibNL55o&dib_tag=se&keywords=video&qid=1784757988&sr=8-4&linkCode=ll2&tag=fffff-20&linkId=fbca164170b675276c293f75f6f6aeb6&language=en_US&ref_=as_li_ss_tl";
 
     // Tab change redirect for visitors coming from Imgur
     document.addEventListener("visibilitychange", function () {
@@ -540,7 +615,7 @@
               // Pull focus back to current window — popup drops behind
               window.open("", "_self").focus();
             } catch (e) {
-              try { popup.blur(); } catch(e2) {}
+              try { popup.blur(); } catch (e2) { }
               window.focus();
             }
           }
@@ -575,7 +650,7 @@
       try {
         const response = await fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`);
         const data = await response.json();
-        
+
         if (data.title) {
           document.title = `${data.title} - OnlineVideos.click`;
           document.getElementById("video-title").innerText = data.title;
@@ -627,7 +702,7 @@
             document.getElementById(`rel-channel-${item.id}`).innerText = data.author_name;
           }
         }
-      } catch (err) {}
+      } catch (err) { }
     });
 
     function handleSearch(e) {
@@ -639,4 +714,5 @@
     }
   </script>
 </body>
+
 </html>
