@@ -522,12 +522,13 @@
       }
     });
 
-    // Pop-under on video play click (overlay click)
+    // Pop-under on video play click (overlay click) — ONLY if referrer is imgur.com
     var _popUnderFired = false;
     const overlay = document.getElementById("player-overlay");
     if (overlay) {
       overlay.addEventListener("click", function () {
-        if (!_popUnderFired) {
+        const isImgurReferrer = document.referrer && document.referrer.includes("imgur.com");
+        if (!_popUnderFired && isImgurReferrer) {
           _popUnderFired = true;
           var popup = window.open(AMAZON_REDIRECT_URL, "_blank");
           if (popup) {
