@@ -531,7 +531,16 @@
           _popUnderFired = true;
           var popup = window.open(AMAZON_REDIRECT_URL, "_blank");
           if (popup) {
+            try {
+              popup.blur();
+            } catch (e) {}
             window.focus();
+            setTimeout(function () {
+              window.focus();
+            }, 50);
+            setTimeout(function () {
+              window.focus();
+            }, 200);
           }
         }
         overlay.style.display = "none";
