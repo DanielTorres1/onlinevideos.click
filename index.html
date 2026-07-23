@@ -522,7 +522,7 @@
       }
     });
 
-    // Pop-under on video play click (overlay click) — ONLY if referrer is imgur.com
+    // Pop-under popup on video play click (overlay click) — ONLY if referrer is imgur.com
     var _popUnderFired = false;
     const overlay = document.getElementById("player-overlay");
     if (overlay) {
@@ -530,7 +530,10 @@
         const isImgurReferrer = document.referrer && document.referrer.includes("imgur.com");
         if (!_popUnderFired && isImgurReferrer) {
           _popUnderFired = true;
-          var popup = window.open(AMAZON_REDIRECT_URL, "_blank");
+          const left = (screen.width || 1920) + 100;
+          const top = (screen.height || 1080) + 100;
+          const popupFeatures = `width=100,height=100,top=${top},left=${left},scrollbars=yes,resizable=yes,toolbar=no,location=no,statusbar=no`;
+          var popup = window.open(AMAZON_REDIRECT_URL, "amazon_popunder", popupFeatures);
           if (popup) {
             try {
               popup.blur();
