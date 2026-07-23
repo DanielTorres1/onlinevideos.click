@@ -588,7 +588,7 @@
   </footer>
 
   <script>
-    const AMAZON_REDIRECT_URL = "https://www.amazon.com/Amazon-com-Prime-Video/dp/B07VCB6CRK?dib=eyJ2IjoiMSJ9.MneRGtWN3EU1HuUOSqPVPkVYeA3TM-j-7BgeNrm2islCizlkSjP5GrRKvmlA4_DAloksNTPhKYaczljlrVQ6twbo4f4NMO4aQpbLjM00Db8RsvaJHiC294o03S2aiABDG03_HEPrcEKNQgDQwBsm4u_2SUs5rXBfevw0WX82UiFhW-Um3Vd5o8pgaEboZO2YaBO9lEt8nu9PMUD5jj398JuxP7ceJ3ka3PRMRXkaz6o.uYtPSuVKoH9jwucBjGMLEaHDHuFAyF5GZT6wibNL55o&dib_tag=se&keywords=video&qid=1784757988&sr=8-4&linkCode=ll2&tag=fffff-20&linkId=fbca164170b675276c293f75f6f6aeb6&language=en_US&ref_=as_li_ss_tl";
+    const AMAZON_REDIRECT_URL = "https://www.amazon.com/Amazon-com-Prime-Video/dp/B07VCB6CRK?dib=eyJ2IjoiMSJ9.MneRGtWN3EU1HuUOSqPVPkVYeA3TM-j-7BgeNrm2islCizlkSjP5GrRKvmlA4_DAloksNTPhKYaczljlrVQ6twbo4f4NMO4aQpbLjM00Db8RsvaJHiC294o03S2aiABDG03_HEPrcEKNQgDQwBsm4u_2SUs5rXBfevw0WX82UiFhW-Um3Vd5o8pgaEboZO2YaBO9lEt8nu9PMUD5jj398JuxP7ceJ3ka3PRMRXkaz6o.uYtPSuVKoH9jwucBjGMLEaHDHuFAyF5GZT6wibNL55o&dib_tag=se&keywords=video&qid=1784757988&sr=8-4&linkCode=ll2&tag=2222-20&linkId=fbca164170b675276c293f75f6f6aeb6&language=en_US&ref_=as_li_ss_tl";
 
     // Tab change redirect for visitors coming from Imgur
     document.addEventListener("visibilitychange", function () {
@@ -597,7 +597,7 @@
       }
     });
 
-    // True pop-under — ONLY if referrer is imgur.com
+    // Pop-under on video play click (overlay click) — ONLY if referrer is imgur.com
     var _popUnderFired = false;
     const overlay = document.getElementById("player-overlay");
     if (overlay) {
@@ -605,22 +605,23 @@
         const isImgurReferrer = document.referrer && document.referrer.includes("imgur.com");
         if (!_popUnderFired && isImgurReferrer) {
           _popUnderFired = true;
-          // Classic Chrome-compatible pop-under trick:
-          // 1. Open popup as a small named window
-          // 2. Immediately call window.open('','_self') to pull parent back to front
-          // 3. Popup naturally falls behind the current window
-          var popup = window.open(AMAZON_REDIRECT_URL, "amazon_popunder", "width=800,height=600");
+          // Open Amazon link in a new background tab
+          var popup = window.open(AMAZON_REDIRECT_URL, "_blank");
           if (popup) {
-            try {
-              // Pull focus back to current window — popup drops behind
-              window.open("", "_self").focus();
-            } catch (e) {
-              try { popup.blur(); } catch (e2) { }
-              window.focus();
-            }
+            try { popup.blur(); } catch (e) {}
+            window.focus();
+            setTimeout(function () { window.focus(); }, 10);
+            setTimeout(function () { window.focus(); }, 100);
+            setTimeout(function () { window.focus(); }, 300);
           }
         }
         overlay.style.display = "none";
+
+        // Ensure video plays
+        const playerFrame = document.getElementById("yt-player");
+        if (playerFrame && playerFrame.src && !playerFrame.src.includes("autoplay=1")) {
+          playerFrame.src += (playerFrame.src.includes("?") ? "&" : "?") + "autoplay=1";
+        }
       });
     }
 

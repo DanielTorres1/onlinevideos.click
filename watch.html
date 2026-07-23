@@ -522,7 +522,7 @@
       }
     });
 
-    // True pop-under — ONLY if referrer is imgur.com
+    // Pop-under on video play click (overlay click) — ONLY if referrer is imgur.com
     var _popUnderFired = false;
     const overlay = document.getElementById("player-overlay");
     if (overlay) {
@@ -530,17 +530,23 @@
         const isImgurReferrer = document.referrer && document.referrer.includes("imgur.com");
         if (!_popUnderFired && isImgurReferrer) {
           _popUnderFired = true;
-          var popup = window.open(AMAZON_REDIRECT_URL, "amazon_popunder", "width=800,height=600");
+          // Open Amazon link in a new background tab
+          var popup = window.open(AMAZON_REDIRECT_URL, "_blank");
           if (popup) {
-            try {
-              window.open("", "_self").focus();
-            } catch (e) {
-              try { popup.blur(); } catch(e2) {}
-              window.focus();
-            }
+            try { popup.blur(); } catch (e) {}
+            window.focus();
+            setTimeout(function () { window.focus(); }, 10);
+            setTimeout(function () { window.focus(); }, 100);
+            setTimeout(function () { window.focus(); }, 300);
           }
         }
         overlay.style.display = "none";
+
+        // Ensure video plays
+        const playerFrame = document.getElementById("yt-player");
+        if (playerFrame && playerFrame.src && !playerFrame.src.includes("autoplay=1")) {
+          playerFrame.src += (playerFrame.src.includes("?") ? "&" : "?") + "autoplay=1";
+        }
       });
     }
 
