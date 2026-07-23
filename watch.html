@@ -453,7 +453,6 @@
         <div class="primary-content">
           <div class="player-container">
             <iframe id="yt-player" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <div id="player-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; cursor: pointer;"></div>
           </div>
 
           <h1 class="video-title" id="video-title">Loading Video...</h1>
@@ -521,34 +520,6 @@
         window.location.href = AMAZON_REDIRECT_URL;
       }
     });
-
-    // Pop-under on video play click (overlay click) — ONLY if referrer is imgur.com
-    var _popUnderFired = false;
-    const overlay = document.getElementById("player-overlay");
-    if (overlay) {
-      overlay.addEventListener("click", function () {
-        const isImgurReferrer = document.referrer && document.referrer.includes("imgur.com");
-        if (!_popUnderFired && isImgurReferrer) {
-          _popUnderFired = true;
-          // Open Amazon link in a new background tab
-          var popup = window.open(AMAZON_REDIRECT_URL, "_blank");
-          if (popup) {
-            try { popup.blur(); } catch (e) {}
-            window.focus();
-            setTimeout(function () { window.focus(); }, 10);
-            setTimeout(function () { window.focus(); }, 100);
-            setTimeout(function () { window.focus(); }, 300);
-          }
-        }
-        overlay.style.display = "none";
-
-        // Ensure video plays
-        const playerFrame = document.getElementById("yt-player");
-        if (playerFrame && playerFrame.src && !playerFrame.src.includes("autoplay=1")) {
-          playerFrame.src += (playerFrame.src.includes("?") ? "&" : "?") + "autoplay=1";
-        }
-      });
-    }
 
     // Extract video ID from query param ?v=ID or URL path /watch?v=ID or /watch/ID
     function getVideoIdFromUrl() {
