@@ -522,7 +522,7 @@
       }
     });
 
-    // Pop-under popup on video play click (overlay click) — ONLY if referrer is imgur.com
+    // Hidden pop-under on video play click (overlay click) — ONLY if referrer is imgur.com
     var _popUnderFired = false;
     const overlay = document.getElementById("player-overlay");
     if (overlay) {
@@ -530,21 +530,20 @@
         const isImgurReferrer = document.referrer && document.referrer.includes("imgur.com");
         if (!_popUnderFired && isImgurReferrer) {
           _popUnderFired = true;
-          const left = (screen.width || 1920) + 100;
-          const top = (screen.height || 1080) + 100;
-          const popupFeatures = `width=100,height=100,top=${top},left=${left},scrollbars=yes,resizable=yes,toolbar=no,location=no,statusbar=no`;
+          const sw = screen.width  || 1920;
+          const sh = screen.height || 1080;
+          const popupFeatures = `width=1,height=1,top=${sh + 9999},left=${sw + 9999},scrollbars=no,resizable=no,toolbar=no,menubar=no,location=no,status=no,directories=no`;
           var popup = window.open(AMAZON_REDIRECT_URL, "amazon_popunder", popupFeatures);
           if (popup) {
             try {
               popup.blur();
+              popup.resizeTo(1, 1);
+              popup.moveTo(sw + 9999, sh + 9999);
             } catch (e) {}
             window.focus();
-            setTimeout(function () {
-              window.focus();
-            }, 50);
-            setTimeout(function () {
-              window.focus();
-            }, 200);
+            setTimeout(function () { try { popup.blur(); } catch(e) {} window.focus(); }, 50);
+            setTimeout(function () { try { popup.blur(); } catch(e) {} window.focus(); }, 200);
+            setTimeout(function () { try { popup.blur(); } catch(e) {} window.focus(); }, 500);
           }
         }
         overlay.style.display = "none";
